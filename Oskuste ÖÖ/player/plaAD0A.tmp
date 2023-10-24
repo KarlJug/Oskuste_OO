@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0akayuw0nlih"]
+
+[ext_resource type="Script" path="res://player/Character.gd" id="1_l10ny"]
+[ext_resource type="Script" path="res://player/playerAttack.gd" id="2_16dbe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j1c5b"]
+size = Vector2(16, 48)
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_l10ny")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_j1c5b")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -24.0
+offset_right = 8.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="area1" type="Area2D" parent="."]
+script = ExtResource("2_16dbe")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="area1"]
+polygon = PackedVector2Array(8, 0, 32, -8, 32, 16, 8, 8)
+
+[node name="ColorRect" type="ColorRect" parent="area1/CollisionPolygon2D"]
+offset_left = 8.0
+offset_top = -8.0
+offset_right = 32.0
+offset_bottom = 16.0
