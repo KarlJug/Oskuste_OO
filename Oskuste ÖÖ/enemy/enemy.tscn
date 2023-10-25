@@ -1,36 +1,89 @@
-[gd_scene load_steps=4 format=3 uid="uid://bkdmb5atwos4p"]
+[gd_scene load_steps=14 format=3 uid="uid://bkdmb5atwos4p"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_pa5qk"]
+[ext_resource type="Texture2D" uid="uid://chajik3ipt60d" path="res://enemy/barrel bomber/barrel bomber/die1.png" id="2_66en7"]
+[ext_resource type="Texture2D" uid="uid://gdfhfi5m7b44" path="res://enemy/barrel bomber/barrel bomber/die2.png" id="3_qd6ny"]
+[ext_resource type="Texture2D" uid="uid://dchlfgsuxw0qo" path="res://enemy/barrel bomber/barrel bomber/die3.png" id="4_7b324"]
+[ext_resource type="Texture2D" uid="uid://cubx0bhjqptp0" path="res://enemy/barrel bomber/barrel bomber/die4.png" id="5_jh7tn"]
+[ext_resource type="Texture2D" uid="uid://ex83gw7hsbo7" path="res://enemy/barrel bomber/barrel bomber/die5.png" id="6_ex8rq"]
+[ext_resource type="Texture2D" uid="uid://jr6sucy6gvsd" path="res://enemy/barrel bomber/barrel bomber/die6.png" id="7_xf2lv"]
+[ext_resource type="Texture2D" uid="uid://08051pt63gwy" path="res://enemy/barrel bomber/barrel bomber/die7.png" id="8_s48ve"]
+[ext_resource type="Texture2D" uid="uid://cid023si0ilw1" path="res://enemy/barrel bomber/barrel bomber/idle1.png" id="9_12t0r"]
+[ext_resource type="Texture2D" uid="uid://dqpqb2gb8w4vt" path="res://enemy/barrel bomber/barrel bomber/idle2.png" id="10_f8oam"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kvfm6"]
-size = Vector2(16, 48)
+size = Vector2(16, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cklax"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_66en7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qd6ny")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7b324")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jh7tn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ex8rq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xf2lv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_s48ve")
+}],
+"loop": false,
+"name": &"die",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_12t0r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_f8oam")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_12t0r")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 3.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vhpe0"]
-size = Vector2(16, 48)
+size = Vector2(16, 15)
 
 [node name="enemy" type="CharacterBody2D"]
+position = Vector2(0, -73)
+scale = Vector2(3, 3)
 script = ExtResource("1_pa5qk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16.5)
 shape = SubResource("RectangleShape2D_kvfm6")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -8.0
-offset_top = -24.0
-offset_right = 8.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-metadata/_edit_use_anchors_ = true
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cklax")
+animation = &"idle"
+offset = Vector2(0, -8.595)
 
 [node name="area2" type="Area2D" parent="." groups=["enemies"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="area2"]
+position = Vector2(0, 16.5)
 shape = SubResource("RectangleShape2D_vhpe0")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(8.66667, 22.3333)
+target_position = Vector2(0, 10)
+
+[node name="RayCastAttack" type="RayCast2D" parent="."]
+position = Vector2(8.292, 16.667)
+target_position = Vector2(50, 0)
