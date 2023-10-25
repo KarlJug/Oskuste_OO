@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy4hkji5t2yxl"
-path="res://.godot/imported/SideView_Grass.png-23a77113f27de3ca9fec9f256485bbe1.ctex"
+uid="uid://cbjuqc37817jw"
+path="res://.godot/imported/open1.png-3b32ee5daf153a04b15d60fa203240b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/SideView_Grass.png"
-dest_files=["res://.godot/imported/SideView_Grass.png-23a77113f27de3ca9fec9f256485bbe1.ctex"]
+source_file="res://Door/open1.png"
+dest_files=["res://.godot/imported/open1.png-3b32ee5daf153a04b15d60fa203240b4.ctex"]
 
 [params]
 

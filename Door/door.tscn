@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://5538cv0ad8hv"]
+
+[ext_resource type="Script" path="res://Door/door.gd" id="1_x52vw"]
+[ext_resource type="Texture2D" uid="uid://cfebnarj5xtnj" path="res://Door/closed.png" id="2_rxc8s"]
+[ext_resource type="Texture2D" uid="uid://bxoce7cgohrt0" path="res://Door/open4.png" id="3_o2b18"]
+[ext_resource type="Texture2D" uid="uid://cxep80k6f5tlg" path="res://Door/open3.png" id="4_vu8mf"]
+[ext_resource type="Texture2D" uid="uid://cjgh63lvjp1ja" path="res://Door/open2.png" id="5_0okjd"]
+[ext_resource type="Texture2D" uid="uid://cbjuqc37817jw" path="res://Door/open1.png" id="6_2sh1k"]
+[ext_resource type="Texture2D" uid="uid://de8p0vuf1vx76" path="res://Door/open.png" id="7_xp532"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fbayn"]
+size = Vector2(677, 454)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ivqh8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rxc8s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_o2b18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vu8mf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0okjd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2sh1k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xp532")
+}],
+"loop": false,
+"name": &"open",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_otq07"]
+size = Vector2(113, 203)
+
+[node name="Door" type="Node2D"]
+
+[node name="Area2D2" type="Area2D" parent="."]
+script = ExtResource("1_x52vw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_fbayn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D2"]
+sprite_frames = SubResource("SpriteFrames_ivqh8")
+animation = &"open"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 26.5)
+shape = SubResource("RectangleShape2D_otq07")
+
+[connection signal="area_entered" from="Area2D2" to="Area2D2" method="_on_area_entered"]
+[connection signal="area_exited" from="Area2D2" to="Area2D2" method="_on_area_exited"]
+[connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D2" to="Area2D2" method="_on_body_exited"]
+[connection signal="body_entered" from="Area2D" to="Area2D2" method="_on_area_2d_body_entered"]
