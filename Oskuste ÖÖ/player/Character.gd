@@ -6,13 +6,21 @@ var area1 : Area2D
 var original_pos : Vector2
 var dash_raycast_pos : Vector2
 
+var explosionForce = 80.0
+var elud = 100
 const SPEED = 400.0
 const JUMP_VELOCITY = -1300.0
 var is_dashing = false
-
+var vec_x = 1
+var previous_vec_x = 1
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+
+func apply_explosion_force(force: Vector2):
+	velocity += force
+
 
 func player_dash():
 	if is_dashing:
@@ -24,7 +32,6 @@ func player_dash():
 	var dash_vector = get_global_mouse_position() - global_position
 	dash_vector  = dash_vector.normalized()
 	
-	var vec_x = 1
 	if dash_vector.x < 0:
 		vec_x = -1
 		
@@ -32,29 +39,22 @@ func player_dash():
 		vec_x = 1
 	
 	# ray cast flip
-	dash_raycast.position.x = vec_x * dash_raycast_pos.x
-
-	if dash_raycast.rotation == 0 and vec_x == -1:
-		dash_raycast.rotation = 3
-	elif dash_raycast.rotation == 3 and vec_x == 1:
-		dash_raycast.rotation = 0
+	if previous_vec_x != vec_x:
+		dash_raycast.position.x *= -1  # vec_x * dash_raycast_pos.x
+		previous_vec_x = vec_x
+		dash_raycast.scale *= -1
 	
 	var step = 0
 	var distance = 10
 	while 20 > step:
-		if is_on_wall() or dash_raycast.is_colliding():
+		if dash_raycast.is_colliding():
 			break
 		
 		self.position.x += vec_x * distance
-
 		
 		await get_tree().create_timer(0.00000000000000000000000001).timeout  # smoothness
 		step += 1
 	
-	is_dashing = false
-
-
-func _on_dash_completed():
 	is_dashing = false
 
 

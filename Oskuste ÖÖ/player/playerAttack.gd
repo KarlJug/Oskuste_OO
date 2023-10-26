@@ -4,7 +4,7 @@ extends Area2D
 var enemy_scene = preload("res://enemy/enemy.tscn")
 @onready var enemy = enemy_scene.instantiate()
 @onready var animated_sprite_2d = $"../AnimatedSprite2D"
-var damage = 50
+var damage = 100
 var attacking = false
 
 func check_for_hits():

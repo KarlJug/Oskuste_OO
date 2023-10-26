@@ -112,6 +112,8 @@ animations = [{
 
 [node name="player" type="CharacterBody2D"]
 scale = Vector2(2, 2)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_l10ny")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -119,16 +121,18 @@ position = Vector2(0.5, 7.5)
 shape = SubResource("RectangleShape2D_j1c5b")
 
 [node name="area1" type="Area2D" parent="."]
-position = Vector2(21, 0)
+position = Vector2(19.5, 0)
+collision_mask = 7
 script = ExtResource("2_16dbe")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="area1"]
-position = Vector2(-20, -4)
-polygon = PackedVector2Array(8, -15, 22, -10, 27, 9, 23, 31, 8, 36)
+position = Vector2(-18, -8.5)
+polygon = PackedVector2Array(8.5, -9, 28, -9, 28, 39, 8.5, 38.5)
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(8, 0)
+position = Vector2(9, 6.5)
 target_position = Vector2(10, 0)
+collision_mask = 7
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_24y2v")
